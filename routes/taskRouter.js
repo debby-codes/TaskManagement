@@ -5,11 +5,12 @@ import {
   readTask,
   updateTask,
 } from "../controllers/taskApis/barrel.js";
+import authMiddleware from "../middlewares/authMiddleware.js";
 const taskRouter = Router();
 
 taskRouter
-  .post("/task/create", createTask)
-  .get("/readTask", readTask)
-  .put("/updateTask/:id", updateTask)
-  .delete("/deleteTask/:id", deleteTask);
+  .post("/task/create", authMiddleware, createTask)
+  .get("/readTask", authMiddleware, readTask)
+  .put("/updateTask/:id", authMiddleware, updateTask)
+  .delete("/deleteTask/:id", authMiddleware, deleteTask);
 export default taskRouter;
